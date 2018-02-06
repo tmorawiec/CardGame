@@ -4,18 +4,16 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class DeckOfCards {
     private List<Card> deck;
-
 
     /**
      * Constructor for making 52 pieces deck of cards with image
      */
     public DeckOfCards() throws IOException {
+
         deck = new ArrayList<>(); //empty deck
 
 
@@ -53,4 +51,6 @@ public class DeckOfCards {
     public void shuffleDeck(){
         Collections.shuffle(deck);
     }
+
+
 }

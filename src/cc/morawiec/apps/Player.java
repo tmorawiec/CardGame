@@ -10,6 +10,7 @@ public class Player {
 
     public Player(String playerName) {
         this.playerName = playerName; //dodać kontrolę nazw
+        this.hand = new Card[2];
         numberOfplayers++;
     }
 
@@ -21,6 +22,11 @@ public class Player {
         return playerName;
     }
 
+    public Card[] getHand() {
+        return hand;
+    }
 
-
+    public void setHand(Card[] hand) {
+        this.hand = hand;
+    }
 }

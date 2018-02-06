@@ -21,9 +21,10 @@ public class PokerDeck extends DeckOfCards {
         }
     }
 
-
-    public void getOneCard() {
+    public Card getOneCard() {
         Card nowakarta = myQueue.poll();
         System.out.println(nowakarta);
+        return nowakarta;
     }
+
 }

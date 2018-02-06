@@ -1,5 +1,7 @@
 package cc.morawiec.apps;
 import cc.morawiec.apps.Cards.DeckOfCards;
+import cc.morawiec.apps.Poker.PokerDeck;
+import cc.morawiec.apps.Poker.Table;
 
 import java.io.IOException;
 
@@ -11,12 +13,19 @@ public class Main {
 
 
         // tworzenie obiektu talia i wylistowanie kart
-        DeckOfCards talia = new DeckOfCards();
 
-        talia.shuffleDeck();
-        talia.getDeck();
-        talia.printDeck();
+        System.out.println("---------nowa talia pokerowa-----------");
+        PokerDeck talia2 = new PokerDeck();
+        talia2.printDeck();
+        System.out.println("--------talia pokerowa potasowana--------------");
+        talia2.shuffleDeck();
+        talia2.printDeck();
+        System.out.println("---------------------------------");
+        talia2.makeQueue();
+        talia2.getOneCard();
+        talia2.getOneCard();
 
+        Table nowaGra = new Table();
 
 
 
