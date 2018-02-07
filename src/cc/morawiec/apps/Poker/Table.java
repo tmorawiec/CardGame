@@ -4,6 +4,8 @@ import cc.morawiec.apps.Cards.Card;
 import cc.morawiec.apps.Player;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * klasa symuluje rozdanie pokerowe
@@ -11,6 +13,7 @@ import java.io.IOException;
 public class Table{
     private PokerDeck talia = new PokerDeck();
     private Player[] gracze;
+    private List<Card> lista = new ArrayList<Card>();
 
     /**
      * Konstruktor tworzy tablicę graczy, tasuje karty i wrzuca je do kolejki
@@ -25,20 +28,48 @@ public class Table{
          */
         this.gracze = new Player[3];
         for (int i=0; i<gracze.length ; i++){
-            String name = "Gracz "+(Integer.toString(i));
+            String name = "Gracz "+(Integer.toString(i+1));
             gracze[i] = new Player(name);
         }
         System.out.println("przy stoliku zasiada " + gracze.length + " graczy");
     }
 
+    public void makeFlop(){
+        System.out.println("Karty na flopie:");
+        for (int i = 0; i < 3; i++) {
+            lista.add(talia.getOneCard());
+        }
+    }
+
+    public void makeTurn(){
+        System.out.println("Karta na turnie:");
+            lista.add(talia.getOneCard());
+    }
+
+    public void makeRiver(){
+        System.out.println("Karta na riverze:");
+            lista.add(talia.getOneCard());
+    }
+
+    public List<Card> getLista() {
+        for (Card aLista : lista) {
+            System.out.println(aLista);
+        }
+        return lista;
+    }
+
     /**
      * Rozdaje po 2 karty wszystkim graczom
      */
-    // do zrobienia:
     public void dealing2Cards(){
-        Card[] tempArray = new Card[2];
-        tempArray[0] = talia.getOneCard();
-        gracze[0].setHand(tempArray);
+        for (Player aGracze : gracze) {
+            System.out.println(aGracze.getPlayerName());
+            aGracze.setFirstCard(talia.getOneCard());
+        }
+        for (Player aGracze : gracze) {
+            System.out.println(aGracze.getPlayerName());
+            aGracze.setSecondCard(talia.getOneCard());
+        }
     }
 
 

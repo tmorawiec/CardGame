@@ -21,9 +21,13 @@ public class PokerDeck extends DeckOfCards {
         }
     }
 
+    /**
+     * wyciąga kartę z talii
+     * @return karta pobrana z talii
+     */
     public Card getOneCard() {
         Card nowakarta = myQueue.poll();
-        System.out.println(nowakarta);
+        System.out.println("Rozdano: "+nowakarta);
         return nowakarta;
     }
 
