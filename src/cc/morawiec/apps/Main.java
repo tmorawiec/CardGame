@@ -23,12 +23,31 @@ public class Main {
         talia2.getOneCard();
         */
         Table nowaGra = new Table();
-        nowaGra.dealing2Cards(); //rozdaje po dwie karty każdemu graczowi
+        System.out.println("Ilość graczy: " + nowaGra.getGracze().length);
+        nowaGra.dealingCards(); //rozdaje karty każdemu graczowi
+
+        System.out.println("---Karty gracza 1:");
+        System.out.println(nowaGra.getGracze()[0].getHand().get(0));
+        System.out.println(nowaGra.getGracze()[0].getHand().get(1));
+        System.out.println("-------");
+
+        System.out.println("------po flopie");
         nowaGra.makeFlop();
-        nowaGra.makeTurn();
-        nowaGra.makeRiver();
-        System.out.println("----");
         nowaGra.getLista();
+
+        System.out.println("------po turnie:");
+        nowaGra.makeTurnOrRiver();
+        nowaGra.getLista();
+
+        System.out.println("------po riverze");
+        nowaGra.makeTurnOrRiver();
+        nowaGra.getLista();
+
+        System.out.println("---Karty gracza 1:");
+        System.out.println(nowaGra.getGracze()[0].getHand().get(0));
+        System.out.println(nowaGra.getGracze()[0].getHand().get(1));
+
+        System.out.println("-------");
 
 
     }

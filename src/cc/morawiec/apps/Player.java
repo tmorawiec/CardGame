@@ -2,16 +2,18 @@ package cc.morawiec.apps;
 
 import cc.morawiec.apps.Cards.Card;
 
+import java.util.ArrayList;
+
 public class Player {
 
     private String playerName;
-    private Card[] hand;
+    private ArrayList<Card> hand;
     private int stack;
 
     public Player(String playerName , int stack) {
         this.playerName = playerName;
         this.stack = stack;
-        this.hand = new Card[2];
+        this.hand = new ArrayList<Card>();
     }
 
     public String getPlayerName() {
@@ -26,16 +28,12 @@ public class Player {
         this.stack = stack;
     }
 
-    public Card[] getHand() {
+    public ArrayList<Card> getHand() {
         return hand;
     }
 
-    public void setFirstCard(Card firstCard){
-        this.hand[0] = firstCard;
+    public void setHand(Card card) {
+        this.hand.add(card);
     }
-    public void setSecondCard(Card secondCard){
-        this.hand[1] = secondCard;
-    }
-
 
 }

@@ -11,9 +11,9 @@ import java.util.List;
  * klasa symuluje rozdanie pokerowe
  */
 public class Table{
-    private PokerDeck talia = new PokerDeck();
-    private Player[] gracze;
-    private List<Card> lista = new ArrayList<Card>();
+    private PokerDeck talia = new PokerDeck();        //talia
+    private Player[] gracze;                          //
+    private List<Card> lista = new ArrayList<Card>(); //board
 
     /**
      * Konstruktor tworzy tablicę graczy, tasuje karty i wrzuca je do kolejki
@@ -24,31 +24,26 @@ public class Table{
         this.talia.makeQueue();
 
         /*
-        tymczasowy fragment: tworzy 3 graczy i dodaje do tablicy
+        tymczasowy fragment: tworzy 3 graczy i dodaje do tablicy, przerobić że gracze
+        są przekazywani w parametrze
          */
         this.gracze = new Player[3];
         for (int i=0; i<gracze.length ; i++){
             String name = "Gracz "+(Integer.toString(i+1));
-            gracze[i] = new Player(name);
+            gracze[i] = new Player(name,5000);
         }
-        System.out.println("przy stoliku zasiada " + gracze.length + " graczy");
     }
 
     public void makeFlop(){
-        System.out.println("Karty na flopie:");
+        talia.getOneCard(); //palenie karty
         for (int i = 0; i < 3; i++) {
             lista.add(talia.getOneCard());
         }
     }
 
-    public void makeTurn(){
-        System.out.println("Karta na turnie:");
-            lista.add(talia.getOneCard());
-    }
-
-    public void makeRiver(){
-        System.out.println("Karta na riverze:");
-            lista.add(talia.getOneCard());
+    public void makeTurnOrRiver(){
+        talia.getOneCard(); //palenie karty
+        lista.add(talia.getOneCard());
     }
 
     public List<Card> getLista() {
@@ -59,20 +54,19 @@ public class Table{
     }
 
     /**
-     * Rozdaje po 2 karty wszystkim graczom
+     * Rozdaje karty wszystkim graczom
      */
-    public void dealing2Cards(){
-        for (Player aGracze : gracze) {
-            System.out.println(aGracze.getPlayerName());
-            aGracze.setFirstCard(talia.getOneCard());
-        }
-        for (Player aGracze : gracze) {
-            System.out.println(aGracze.getPlayerName());
-            aGracze.setSecondCard(talia.getOneCard());
+    public void dealingCards(){
+        for (int i = 0; i < 2; i++) {
+            for (Player aGracze : gracze) {
+                aGracze.setHand(talia.getOneCard());
+            }
         }
     }
 
-
+    public Player[] getGracze() {
+        return gracze;
+    }
 
 
 }

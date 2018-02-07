@@ -27,7 +27,6 @@ public class PokerDeck extends DeckOfCards {
      */
     public Card getOneCard() {
         Card nowakarta = myQueue.poll();
-        System.out.println("Rozdano: "+nowakarta);
         return nowakarta;
     }
 
