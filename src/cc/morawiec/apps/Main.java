@@ -1,5 +1,4 @@
 package cc.morawiec.apps;
-import cc.morawiec.apps.Poker.Deal;
 import cc.morawiec.apps.Poker.TableSettings;
 
 import java.io.IOException;
@@ -22,28 +21,28 @@ public class Main {
         talia2.getOneCard();
 
         Deal nowaGra = new Deal();
-        System.out.println("Ilość graczy: " + nowaGra.getGracze().length);
+        System.out.println("Ilość graczy: " + nowaGra.getPlayers().length);
         nowaGra.dealingCards(); //rozdaje karty każdemu graczowi
 
         System.out.println("---Karty gracza 1:");
-        System.out.println(nowaGra.getGracze()[0].getHand());
+        System.out.println(nowaGra.getPlayers()[0].getHand());
         System.out.println("-------");
 
         System.out.println("------po flopie");
         nowaGra.makeFlop();
-        nowaGra.getLista();
+        nowaGra.getBoard();
 
         System.out.println("------po turnie:");
         nowaGra.makeTurnOrRiver();
-        nowaGra.getLista();
+        nowaGra.getBoard();
 
         System.out.println("------po riverze");
         nowaGra.makeTurnOrRiver();
-        nowaGra.getLista();
+        nowaGra.getBoard();
 
         System.out.println("---Karty gracza 1:");
-        System.out.println(nowaGra.getGracze()[0].getHand().get(0));
-        System.out.println(nowaGra.getGracze()[0].getHand().get(1));
+        System.out.println(nowaGra.getPlayers()[0].getHand().get(0));
+        System.out.println(nowaGra.getPlayers()[0].getHand().get(1));
         */
 
         System.out.println("-------");
@@ -65,11 +64,11 @@ public class Main {
         rozgrywka.getDeal().makeTurnOrRiver();
         rozgrywka.getDeal().makeTurnOrRiver();
 
-        System.out.println(rozgrywka.getDeal().getLista());
+        System.out.println(rozgrywka.getDeal().getBoard());
 
-        System.out.println(rozgrywka.getDeal().getGracze().get(0).getHand());
+        System.out.println(rozgrywka.getDeal().getPlayers().get(0).getHand());
 
-        System.out.println(rozgrywka.getDeal().getGracze());
+        System.out.println(rozgrywka.getDeal().getPlayers());
 
 
 

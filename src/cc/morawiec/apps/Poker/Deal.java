@@ -11,10 +11,9 @@ import java.util.List;
  * klasa symuluje rozdanie pokerowe
  */
 public class Deal {
-    private PokerDeck talia = new PokerDeck();        //talia
-    private List<Player> gracze2;
-    //private Player[] gracze;
-    private List<Card> lista = new ArrayList<Card>(); //board
+    private PokerDeck talia = new PokerDeck();
+    private List<Player> players;
+    private List<Card> board = new ArrayList<Card>();
 
     /**
      * Konstruktor przekazuje graczy do listy, tasuje karty i wrzuca je do kolejki
@@ -23,39 +22,26 @@ public class Deal {
     public Deal(List<Player> playersToDeal) throws IOException {
         this.talia.shuffleDeck();
         this.talia.makeQueue();
-
-        this.gracze2 = playersToDeal;
-
-        /*
-        tymczasowy fragment: tworzy 3 graczy i dodaje do tablicy, przerobić że gracze
-        są przekazywani w parametrze
-
-        this.gracze = new Player[3];
-        for (int i=0; i<gracze.length ; i++){
-            String name = "Gracz "+(Integer.toString(i+1));
-            gracze[i] = new Player(name,5000);
-        }
-        */
-
+        this.players = playersToDeal;
     }
 
     public void makeFlop(){
         talia.getOneCard(); //palenie karty
         for (int i = 0; i < 3; i++) {
-            lista.add(talia.getOneCard());
+            board.add(talia.getOneCard());
         }
     }
 
     public void makeTurnOrRiver(){
         talia.getOneCard(); //palenie karty
-        lista.add(talia.getOneCard());
+        board.add(talia.getOneCard());
     }
 
-    public List<Card> getLista() {
-        for (Card aLista : lista) {
+    public List<Card> getBoard() {
+        for (Card aLista : board) {
             System.out.println(aLista);
         }
-        return lista;
+        return board;
     }
 
     /**
@@ -63,14 +49,14 @@ public class Deal {
      */
     public void dealingCards(){
         for (int i = 0; i < 2; i++) {
-            for (Player aGracze : gracze2) {
+            for (Player aGracze : players) {
                 aGracze.setHand(talia.getOneCard());
             }
         }
     }
 
-    public List<Player> getGracze() {
-        return gracze2;
+    public List<Player> getPlayers() {
+        return players;
     }
 
 
