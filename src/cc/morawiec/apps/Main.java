@@ -1,7 +1,6 @@
 package cc.morawiec.apps;
-import cc.morawiec.apps.Cards.DeckOfCards;
-import cc.morawiec.apps.Poker.PokerDeck;
-import cc.morawiec.apps.Poker.Table;
+import cc.morawiec.apps.Poker.Deal;
+import cc.morawiec.apps.Poker.TableSettings;
 
 import java.io.IOException;
 
@@ -21,14 +20,13 @@ public class Main {
         talia2.makeQueue();
         talia2.getOneCard();
         talia2.getOneCard();
-        */
-        Table nowaGra = new Table();
+
+        Deal nowaGra = new Deal();
         System.out.println("Ilość graczy: " + nowaGra.getGracze().length);
         nowaGra.dealingCards(); //rozdaje karty każdemu graczowi
 
         System.out.println("---Karty gracza 1:");
-        System.out.println(nowaGra.getGracze()[0].getHand().get(0));
-        System.out.println(nowaGra.getGracze()[0].getHand().get(1));
+        System.out.println(nowaGra.getGracze()[0].getHand());
         System.out.println("-------");
 
         System.out.println("------po flopie");
@@ -46,8 +44,35 @@ public class Main {
         System.out.println("---Karty gracza 1:");
         System.out.println(nowaGra.getGracze()[0].getHand().get(0));
         System.out.println(nowaGra.getGracze()[0].getHand().get(1));
+        */
 
         System.out.println("-------");
+        System.out.println("tworzę obiekt stół:");
+
+        TableSettings rozgrywka = new TableSettings(5000,false,false);
+        rozgrywka.makePlayers(5);
+        rozgrywka.dealIt();
+        System.out.println("Sredni stack na stole: " + rozgrywka.getAvgStack());
+
+        System.out.println(rozgrywka.getSeats().get(0).getPlayerName()); //imie gracza na poziomie całej gry
+        System.out.println(rozgrywka.getSeats().get(0));                 //nazwa obiektu gracza
+
+
+
+        rozgrywka.dealIt();
+        rozgrywka.getDeal().dealingCards();
+        rozgrywka.getDeal().makeFlop();
+        rozgrywka.getDeal().makeTurnOrRiver();
+        rozgrywka.getDeal().makeTurnOrRiver();
+
+        System.out.println(rozgrywka.getDeal().getLista());
+
+        System.out.println(rozgrywka.getDeal().getGracze().get(0).getHand());
+
+        System.out.println(rozgrywka.getDeal().getGracze());
+
+
+
 
 
     }

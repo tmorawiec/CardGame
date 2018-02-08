@@ -9,10 +9,14 @@ public class Player {
     private String playerName;
     private ArrayList<Card> hand;
     private int stack;
+    private boolean addon;
+    private boolean rebuy;
 
     public Player(String playerName , int stack) {
         this.playerName = playerName;
         this.stack = stack;
+        this.addon = true;      //gracz może domyślnie brać addon
+        this.rebuy = true;      //gracz może domyślnie brać rebuy
         this.hand = new ArrayList<Card>();
     }
 
@@ -22,10 +26,6 @@ public class Player {
 
     public int getStack() {
         return stack;
-    }
-
-    public void setStack(int stack) {
-        this.stack = stack;
     }
 
     public ArrayList<Card> getHand() {
