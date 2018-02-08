@@ -12,8 +12,8 @@ import java.util.List;
 public class TableSettings {
 
     final private int buyin;        //kwota wejścia do gry
-    private boolean addon;          //czy odowiązują addony
-    private boolean rebuy;          //czy obowiązują rebuy'e
+    final private boolean addon;          //czy odowiązują addony
+    final private boolean rebuy;          //czy obowiązują rebuy'e
     private int level;              //runda
     private List<Player> seats;     //miejsca przy stole
     private int seatsLimit;         //limit miejsc
@@ -45,7 +45,7 @@ public class TableSettings {
         if ((howManyPlayers>=2)&&(howManyPlayers<=this.seatsLimit)){
             for (int i=0; i<howManyPlayers ; i++){
                 String name = "Gracz "+(Integer.toString(i+1));
-                Player nowygracz = new Player(name,this.buyin);
+                Player nowygracz = new Player(name,this.buyin,this.addon,this.rebuy);
                 this.seats.add(nowygracz);
             }
         }
