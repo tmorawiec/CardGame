@@ -38,9 +38,6 @@ public class Deal {
     }
 
     public List<Card> getBoard() {
-        for (Card aLista : board) {
-            System.out.println(aLista);
-        }
         return board;
     }
 

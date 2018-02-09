@@ -24,18 +24,21 @@ public class Main {
 
         rozgrywka.dealIt();
         rozgrywka.getDeal().dealingCards();
-        rozgrywka.getDeal().makeFlop();
-        rozgrywka.getDeal().makeTurnOrRiver();
-        rozgrywka.getDeal().makeTurnOrRiver();
-
-
-
         System.out.println(rozgrywka.getDeal().getPlayers().get(0).getHand());
-
-        System.out.println(rozgrywka.getDeal().getPlayers());
-
-        System.out.println("----");
         System.out.println(CheckHand.check(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
+        rozgrywka.getDeal().makeFlop();
+        System.out.println(CheckHand.check(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
+        rozgrywka.getDeal().makeTurnOrRiver();
+        System.out.println(CheckHand.check(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
+        rozgrywka.getDeal().makeTurnOrRiver();
+        System.out.println(CheckHand.check(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
+        System.out.println(CheckHand.check(rozgrywka.getDeal().getPlayers().get(1).getHand(),rozgrywka.getDeal().getBoard()));
+
+
+
+
+
+
 
 
 
