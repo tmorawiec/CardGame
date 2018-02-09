@@ -22,7 +22,7 @@ public enum HandRank {
         this.handValue = value;
     }
 
-    public int getCardValue() {
+    public int getHandValue() {
         return handValue;
     }
 }
