@@ -2,7 +2,7 @@ package cc.morawiec.apps.Cards;
 
 import java.awt.image.BufferedImage;
 
-public class Card {
+public class Card implements Comparable<Card>{
     private CardFigure figura;
     private Suit kolor;
     private BufferedImage cardImage;
@@ -37,4 +37,18 @@ public class Card {
         return figura.getCardValue();
     }
 
+    /**
+     * Nadpisana metoda porównująca 2 karty
+     * @param o karta do której chcemy porównywać
+     * @return 0 jeśli są takie same, wartości minusowe jeśli ...
+     */
+    @Override
+    public int compareTo(Card o) {
+        if (this.figura.getCardValue() == o.figura.getCardValue()){
+            return 0;
+        }
+        else{
+            return o.figura.getCardValue() - this.figura.getCardValue();
+        }
+    }
 }
