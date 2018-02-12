@@ -1,9 +1,12 @@
 package cc.morawiec.apps;
 import cc.morawiec.apps.Cards.Card;
+import cc.morawiec.apps.Cards.DeckOfCards;
 import cc.morawiec.apps.Poker.CheckHand;
 import cc.morawiec.apps.Poker.TableSettings;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
 
@@ -38,6 +41,32 @@ public class Main {
         Card karta1 = rozgrywka.getDeal().getPlayers().get(0).getHand().get(0);
         Card karta2 = rozgrywka.getDeal().getPlayers().get(1).getHand().get(0);
         System.out.println(karta1.compareTo(karta2));
+        //test sortowania
+        ArrayList<Card> reka = CheckHand.join(rozgrywka.getDeal().getPlayers().get(1).getHand(),rozgrywka.getDeal().getBoard());
+        Collections.sort(reka);
+        System.out.println(reka); //działa :)
+
+        //testowanie sprawdzania układów
+        ArrayList<Card> nowareka = new ArrayList<>();
+        DeckOfCards taliaprobna = new DeckOfCards();
+
+
+        Card s3 = taliaprobna.getDeck().get(1);
+        Card s2 = taliaprobna.getDeck().get(0);
+        Card sA = taliaprobna.getDeck().get(12);
+        System.out.println(s3);
+        System.out.println(s2);
+        System.out.println(sA);
+
+        System.out.println(sA.getVal());
+        System.out.println(CheckHand.hasConsecutiveRank(s2,sA));
+
+        ///
+        System.out.println(CheckHand.is_straight(reka));
+
+
+
+
 
 
 

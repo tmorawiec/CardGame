@@ -44,11 +44,6 @@ public class Card implements Comparable<Card>{
      */
     @Override
     public int compareTo(Card o) {
-        if (this.figura.getCardValue() == o.figura.getCardValue()){
-            return 0;
-        }
-        else{
-            return o.figura.getCardValue() - this.figura.getCardValue();
-        }
+        return o.figura.getCardValue() - this.figura.getCardValue();
     }
 }
