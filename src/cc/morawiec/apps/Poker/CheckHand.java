@@ -41,17 +41,40 @@ public abstract class CheckHand {
 
     public static int is_straight(ArrayList<Card> o){
         int i = 0;
-        int streight = 1;
+        int straight = 1;
+
         while (i < o.size()-1) {
             if (hasConsecutiveRank(o.get(i),o.get(i+1))){
-
-                streight++;
+                straight++;
+                if (straight==5) break;
             }
-
+            else if (!hasSameValue(o.get(i),o.get(i+1))){
+                straight = 1;
+            }
             i++;
-
         }
-        return streight;
+        if (straight == 4 && hasConsecutiveRank(o.get(0),o.get(o.size()-1))){
+            straight = 5;
+        }
+        return straight;
+    }
+
+    public static boolean isOnePair(ArrayList<Card> o){
+        for(int i=0;i<o.size()-1;i++){
+            if (hasSameValue(o.get(i),o.get(i+1))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isThreeOfKind(ArrayList<Card> o){
+        for(int i=0;i<o.size()-2;i++){
+            if (hasThreeSameValue(o.get(i),o.get(i+1),o.get(i+2))){
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -67,6 +90,10 @@ public abstract class CheckHand {
 
     public static boolean hasSameValue(Card card1,Card card2){
         return (card1.getVal() == card2.getVal());
+    }
+
+    public static boolean hasThreeSameValue(Card card1,Card card2,Card card3){
+        return ((card1.getVal() == card2.getVal()) && (card1.getVal() == card3.getVal()));
     }
 
 }

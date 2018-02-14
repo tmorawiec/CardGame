@@ -51,20 +51,37 @@ public class Main {
         DeckOfCards taliaprobna = new DeckOfCards();
 
 
-        Card s3 = taliaprobna.getDeck().get(1);
+        Card s1 = taliaprobna.getDeck().get(2);
         Card s2 = taliaprobna.getDeck().get(0);
-        Card sA = taliaprobna.getDeck().get(12);
-        System.out.println(s3);
-        System.out.println(s2);
-        System.out.println(sA);
+        Card s3 = taliaprobna.getDeck().get(26);
+        Card s4 = taliaprobna.getDeck().get(13);
+        Card s5 = taliaprobna.getDeck().get(1);
+        Card s6 = taliaprobna.getDeck().get(1);
+        Card s7 = taliaprobna.getDeck().get(0);
 
-        System.out.println(sA.getVal());
-        System.out.println(CheckHand.hasConsecutiveRank(s2,sA));
+        nowareka.add(0,s1);
+        nowareka.add(1,s2);
+        nowareka.add(2,s3);
+        nowareka.add(3,s4);
+        nowareka.add(4,s5);
+        nowareka.add(5,s6);
+        nowareka.add(6,s7);
+
+        System.out.println(nowareka);
 
         ///
+        System.out.println(CheckHand.is_straight(nowareka));
         System.out.println(CheckHand.is_straight(reka));
+        System.out.println("-------");
+        System.out.println("sztuczna: " + CheckHand.isOnePair(nowareka));
+        System.out.println("losowa: " + CheckHand.isOnePair(reka));
 
-
+        if (nowareka.get(nowareka.size()-1).getVal() == 2){
+            System.out.println("dwojka");
+        }
+        System.out.println("----");
+        System.out.println("test trojki sztuczna: " + CheckHand.isThreeOfKind(reka));
+        System.out.println("test trojki sztuczna: " + CheckHand.isThreeOfKind(nowareka));
 
 
 
