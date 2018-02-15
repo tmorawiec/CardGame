@@ -70,7 +70,7 @@ public abstract class CheckHand {
 
     public static boolean isThreeOfKind(ArrayList<Card> o){
         for(int i=0;i<o.size()-2;i++){
-            if (hasThreeSameValue(o.get(i),o.get(i+1),o.get(i+2))){
+            if (hasSameValue(o.get(i),o.get(i+1),o.get(i+2))){
                 return true;
             }
         }
@@ -79,7 +79,16 @@ public abstract class CheckHand {
 
     public static boolean isQuads(ArrayList<Card> o){
         for(int i=0;i<o.size()-3;i++){
-            if (hasFourSameValue(o.get(i),o.get(i+1),o.get(i+2),o.get(i+3))){
+            if (hasSameValue(o.get(i),o.get(i+1),o.get(i+2),o.get(i+3))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isFlush(ArrayList<Card> o){
+        for(int i=0;i<o.size()-4;i++){
+            if (hasSameSuit(o.get(i),o.get(i+1),o.get(i+2),o.get(i+3),o.get(i+4))){
                 return true;
             }
         }
@@ -92,7 +101,7 @@ public abstract class CheckHand {
         int usedNumb = 0;
 
             for(int i=0;i<o.size()-2;i++){
-                if (hasThreeSameValue(o.get(i),o.get(i+1),o.get(i+2))){
+                if (hasSameValue(o.get(i),o.get(i+1),o.get(i+2))){
                     usedNumb = o.get(i).getVal();
                     is_three = true;
                 }
@@ -110,26 +119,32 @@ public abstract class CheckHand {
     }
 
 
+
+
     /**
      * Sprawdza czy dwie kolejne karty robią draw do strita
      * @param card1
      * @param card2
      * @return true jeśli jest draw do strita
      */
-    public static boolean hasConsecutiveRank(Card card1, Card card2){
+    private static boolean hasConsecutiveRank(Card card1, Card card2){
         return (card2.getVal() == card1.getVal() - 1)||(card1.getFigura() == CardFigure.ACE && card2.getFigura() == CardFigure.TWO);
     }
 
-    public static boolean hasSameValue(Card card1,Card card2){
+    private static boolean hasSameValue(Card card1, Card card2){
         return (card1.getVal() == card2.getVal());
     }
 
-    public static boolean hasThreeSameValue(Card card1,Card card2,Card card3){
+    private static boolean hasSameValue(Card card1, Card card2, Card card3){
         return ((card1.getVal() == card2.getVal()) && (card1.getVal() == card3.getVal()));
     }
 
-    public static boolean hasFourSameValue(Card card1,Card card2,Card card3,Card card4){
+    private static boolean hasSameValue(Card card1, Card card2, Card card3, Card card4){
         return ((card1.getVal() == card2.getVal()) && (card1.getVal() == card3.getVal()) && (card1.getVal() == card4.getVal()));
+    }
+
+    private static boolean hasSameSuit(Card card1, Card card2, Card card3, Card card4, Card card5){
+        return ((card1.getKolor() == card2.getKolor()) && (card1.getKolor() == card3.getKolor()) && (card1.getKolor() == card4.getKolor()) && (card1.getKolor() == card5.getKolor()));
     }
 
 }
