@@ -77,6 +77,38 @@ public abstract class CheckHand {
         return false;
     }
 
+    public static boolean isQuads(ArrayList<Card> o){
+        for(int i=0;i<o.size()-3;i++){
+            if (hasFourSameValue(o.get(i),o.get(i+1),o.get(i+2),o.get(i+3))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isFullhouse(ArrayList<Card> o){
+        boolean is_three = false;
+        boolean is_two = false;
+        int usedNumb = 0;
+
+            for(int i=0;i<o.size()-2;i++){
+                if (hasThreeSameValue(o.get(i),o.get(i+1),o.get(i+2))){
+                    usedNumb = o.get(i).getVal();
+                    is_three = true;
+                }
+            }
+            if (is_three){
+                for(int i=0;i<o.size()-1;i++){
+                    if (hasSameValue(o.get(i),o.get(i+1))){
+                        if (o.get(i).getVal() != usedNumb){
+                            is_two = true;
+                        }
+                    }
+                }
+            }
+        return (is_three && is_two);
+    }
+
 
     /**
      * Sprawdza czy dwie kolejne karty robią draw do strita
@@ -94,6 +126,10 @@ public abstract class CheckHand {
 
     public static boolean hasThreeSameValue(Card card1,Card card2,Card card3){
         return ((card1.getVal() == card2.getVal()) && (card1.getVal() == card3.getVal()));
+    }
+
+    public static boolean hasFourSameValue(Card card1,Card card2,Card card3,Card card4){
+        return ((card1.getVal() == card2.getVal()) && (card1.getVal() == card3.getVal()) && (card1.getVal() == card4.getVal()));
     }
 
 }

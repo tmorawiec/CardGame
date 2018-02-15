@@ -51,13 +51,13 @@ public class Main {
         DeckOfCards taliaprobna = new DeckOfCards();
 
 
-        Card s1 = taliaprobna.getDeck().get(2);
-        Card s2 = taliaprobna.getDeck().get(0);
-        Card s3 = taliaprobna.getDeck().get(26);
+        Card s1 = taliaprobna.getDeck().get(1);
+        Card s2 = taliaprobna.getDeck().get(1);
+        Card s3 = taliaprobna.getDeck().get(3);
         Card s4 = taliaprobna.getDeck().get(13);
-        Card s5 = taliaprobna.getDeck().get(1);
-        Card s6 = taliaprobna.getDeck().get(1);
-        Card s7 = taliaprobna.getDeck().get(0);
+        Card s5 = taliaprobna.getDeck().get(2);
+        Card s6 = taliaprobna.getDeck().get(2);
+        Card s7 = taliaprobna.getDeck().get(2);
 
         nowareka.add(0,s1);
         nowareka.add(1,s2);
@@ -80,9 +80,14 @@ public class Main {
             System.out.println("dwojka");
         }
         System.out.println("----");
-        System.out.println("test trojki sztuczna: " + CheckHand.isThreeOfKind(reka));
+        System.out.println("test trojki losowa: " + CheckHand.isThreeOfKind(reka));
         System.out.println("test trojki sztuczna: " + CheckHand.isThreeOfKind(nowareka));
-
+        System.out.println("----");
+        System.out.println("test karety losowa: " + CheckHand.isQuads(reka));
+        System.out.println("test karety sztuczna: " + CheckHand.isQuads(nowareka));
+        System.out.println("----");
+        System.out.println("test fula losowa: " + CheckHand.isFullhouse(reka));
+        System.out.println("test fula sztuczna: " + CheckHand.isFullhouse(nowareka));
 
 
 
