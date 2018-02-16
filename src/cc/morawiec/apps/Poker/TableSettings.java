@@ -1,5 +1,6 @@
 package cc.morawiec.apps.Poker;
 
+import cc.morawiec.apps.Cards.Card;
 import cc.morawiec.apps.Player;
 
 import java.io.IOException;
@@ -86,6 +87,37 @@ public class TableSettings {
         int avgStack = sumStack/seats.size();
         return avgStack;
     }
+
+    /**
+     * Sprawdza układ pokerowy na ręce gracza
+     * @param hand ręka gracza
+     * @return najwyższy układ pokerowy
+     */
+
+
+    public HandRank handPower(ArrayList<Card> hand){
+
+        if(CheckHand.isRoyalFlush(hand))
+            return HandRank.ROYAL_FLUSH;
+        else if(CheckHand.isPoker(hand))
+            return HandRank.POKER;
+        else if(CheckHand.isQuads(hand))
+            return HandRank.QUADS;
+        else if(CheckHand.isFullhouse(hand))
+            return HandRank.FULL_HOUSE;
+        //else if(CheckHand.isFlush(hand))
+        //    return HandRank.FLUSH;
+        else if(CheckHand.isStraight(hand))
+            return HandRank.STRAIGHT;
+        else if(CheckHand.isThreeOfKind(hand))
+            return HandRank.THREE_OF_KIND;
+        else if(CheckHand.isTwoPair(hand))
+            return HandRank.TWO_PAIR;
+        else if(CheckHand.isOnePair(hand))
+            return HandRank.ONE_PAIR;
+        else return HandRank.HIGH_CARD;
+    }
+
 
 
 }

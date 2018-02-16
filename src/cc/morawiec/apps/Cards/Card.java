@@ -38,12 +38,18 @@ public class Card implements Comparable<Card>{
     }
 
     /**
-     * Nadpisana metoda porównująca 2 karty
+     * Nadpisana metoda porównująca 2 karty wykorzystywana w sortowaniu wg wartosci karty
      * @param o karta do której chcemy porównywać
      * @return 0 jeśli są takie same, wartości minusowe jeśli ...
      */
     @Override
     public int compareTo(Card o) {
         return o.figura.getCardValue() - this.figura.getCardValue();
+    }
+
+    public int compareBySuit(Card one, Card other) {
+
+            return one.kolor.compareTo(other.kolor);
+
     }
 }

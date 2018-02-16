@@ -2,12 +2,21 @@ package cc.morawiec.apps.Poker;
 
 import cc.morawiec.apps.Cards.Card;
 import cc.morawiec.apps.Cards.CardFigure;
+import com.sun.corba.se.pept.transport.ContactInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class CheckHand {
+/**
+ * metody stosować po uprzednim posegregowaniu kart wg wartosci
+ */
+public final class CheckHand {
+
+    /**
+     * Don't let anyone instantiate this class.
+     */
+    private CheckHand(){}
 
     /**
      * scala karty gracza z kartami na stole
@@ -22,24 +31,20 @@ public abstract class CheckHand {
         return allCards;
     }
 
-    /**
-     * Sprawdza układ pokerowy na ręce gracza
-     * @param hand ręka gracza
-     * @return najwyższy układ pokerowy
-     */
-    public static HandRank checkHand(ArrayList<Card> hand){
-        Collections.sort(hand);
 
-        // todo-me napisanie metody
-        return null;
+
+    public static boolean isRoyalFlush(ArrayList<Card> o){
+        return false;
+        // TODO: 16.02.2018  
     }
 
-    public static boolean is_royal_flush(ArrayList<Card> o){
-        return true;
+    public static boolean isPoker(ArrayList<Card> o){
+        return false;
+        // TODO: 16.02.2018
     }
 
 
-    public static int is_straight(ArrayList<Card> o){
+    public static boolean isStraight(ArrayList<Card> o){
         int i = 0;
         int straight = 1;
 
@@ -53,10 +58,10 @@ public abstract class CheckHand {
             }
             i++;
         }
-        if (straight == 4 && hasConsecutiveRank(o.get(0),o.get(o.size()-1))){
+        if (straight == 4 && hasConsecutiveRank(o.get(0),o.get(o.size()-1))){ //daje strita przy A2
             straight = 5;
         }
-        return straight;
+        return (straight==5);
     }
 
     public static boolean isOnePair(ArrayList<Card> o){
@@ -86,7 +91,9 @@ public abstract class CheckHand {
         return false;
     }
 
+    // TODO: 16.02.2018
     public static boolean isFlush(ArrayList<Card> o){
+        //Collections.sort(o);
         for(int i=0;i<o.size()-4;i++){
             if (hasSameSuit(o.get(i),o.get(i+1),o.get(i+2),o.get(i+3),o.get(i+4))){
                 return true;
@@ -95,14 +102,38 @@ public abstract class CheckHand {
         return false;
     }
 
+    public static boolean isTwoPair(ArrayList<Card> o){
+        boolean firstPair = false;
+        boolean secondPair = false;
+        int usedNumb = 0;
+        int kicker = 0;
+
+        for(int i=0;i<o.size()-1;i++){
+            if (hasSameValue(o.get(i),o.get(i+1))){
+                usedNumb = o.get(i).getVal();
+                firstPair = true;
+            }
+        }
+        if (firstPair){
+            for(int i=0;i<o.size()-1;i++){
+                if ((hasSameValue(o.get(i),o.get(i+1))) && (o.get(i).getVal() != usedNumb)){
+                    secondPair = true;
+                }
+            }
+        }
+        return (secondPair);
+    }
+
     public static boolean isFullhouse(ArrayList<Card> o){
         boolean is_three = false;
         boolean is_two = false;
         int usedNumb = 0;
+        int kicker = 0;
 
             for(int i=0;i<o.size()-2;i++){
                 if (hasSameValue(o.get(i),o.get(i+1),o.get(i+2))){
                     usedNumb = o.get(i).getVal();
+                    kicker = usedNumb;
                     is_three = true;
                 }
             }
@@ -111,11 +142,14 @@ public abstract class CheckHand {
                     if (hasSameValue(o.get(i),o.get(i+1))){
                         if (o.get(i).getVal() != usedNumb){
                             is_two = true;
+                            if (usedNumb < o.get(i).getVal()){
+                                kicker = o.get(i).getVal();
+                            }
                         }
                     }
                 }
             }
-        return (is_three && is_two);
+        return (is_two);
     }
 
 

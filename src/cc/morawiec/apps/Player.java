@@ -9,18 +9,20 @@ public class Player {
 
     private String playerName;
     private ArrayList<Card> hand;
-    private HandRank handName;
+    private HandRank handPower;
+    private int kicker;
     private int stack;
     private boolean addon;
     private boolean rebuy;
 
     public Player(String playerName , int stack, boolean addon, boolean rebuy) {
         this.playerName = playerName;
-        this.handName = null;
+        this.handPower = null;
+        this.kicker = 0;
         this.stack = stack;
         this.addon = addon;
         this.rebuy = rebuy;
-        this.hand = new ArrayList<Card>();
+        this.hand = new ArrayList<>();
     }
 
     public String getPlayerName() {
@@ -41,17 +43,14 @@ public class Player {
 
     public void setHand(Card card) {
         this.hand.add(card);
-        //if (hand.size()>1){
-        //    setHandName(x);
-        //}
     }
 
     //ustawia i pobiera typ układu na ręce
-    public HandRank getHandName() {
-        return handName;
+    public HandRank getHandPower() {
+        return handPower;
     }
 
-    public void setHandName(HandRank handName) {
-        this.handName = handName;
+    public void setHandPower(HandRank handPower) {
+        this.handPower = handPower;
     }
 }
