@@ -1,12 +1,10 @@
 package cc.morawiec.apps;
 import cc.morawiec.apps.Cards.Card;
-import cc.morawiec.apps.Cards.DeckOfCards;
 import cc.morawiec.apps.Poker.CheckHand;
 import cc.morawiec.apps.Poker.TableSettings;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Main {
 
@@ -28,7 +26,6 @@ public class Main {
 
         rozgrywka.dealIt();
         rozgrywka.getDeal().dealingCards();
-        System.out.println(rozgrywka.getDeal().getPlayers().get(0).getHand());
         System.out.println(CheckHand.join(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
         rozgrywka.getDeal().makeFlop();
         System.out.println(CheckHand.join(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
@@ -36,22 +33,21 @@ public class Main {
         System.out.println(CheckHand.join(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
         rozgrywka.getDeal().makeTurnOrRiver();
         System.out.println(CheckHand.join(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
-        System.out.println(CheckHand.join(rozgrywka.getDeal().getPlayers().get(1).getHand(),rozgrywka.getDeal().getBoard()));
-        System.out.println("porównanie 2 kart");
-        Card karta1 = rozgrywka.getDeal().getPlayers().get(0).getHand().get(0);
-        Card karta2 = rozgrywka.getDeal().getPlayers().get(1).getHand().get(0);
+        System.out.println("test sortowania");
 
-        //test sortowania
+
+
         ArrayList<Card> reka0 = CheckHand.join(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard());
         ArrayList<Card> reka1 = CheckHand.join(rozgrywka.getDeal().getPlayers().get(1).getHand(),rozgrywka.getDeal().getBoard());
         ArrayList<Card> reka2 = CheckHand.join(rozgrywka.getDeal().getPlayers().get(2).getHand(),rozgrywka.getDeal().getBoard());
         ArrayList<Card> reka3 = CheckHand.join(rozgrywka.getDeal().getPlayers().get(3).getHand(),rozgrywka.getDeal().getBoard());
         ArrayList<Card> reka4 = CheckHand.join(rozgrywka.getDeal().getPlayers().get(4).getHand(),rozgrywka.getDeal().getBoard());
-        Collections.sort(reka0);
-        Collections.sort(reka1);
-        Collections.sort(reka2);
-        Collections.sort(reka3);
-        Collections.sort(reka4);
+
+
+
+        System.out.println("----------");
+
+        System.out.println("Lista rąk");
         System.out.println(reka0);
         System.out.println(reka1);
         System.out.println(reka2);
@@ -63,6 +59,13 @@ public class Main {
         System.out.println(rozgrywka.handPower(reka2));
         System.out.println(rozgrywka.handPower(reka3));
         System.out.println(rozgrywka.handPower(reka4));
+        System.out.println("Lista rąk");
+        System.out.println(reka0);
+        System.out.println(reka1);
+        System.out.println(reka2);
+        System.out.println(reka3);
+        System.out.println(reka4);
+
 /*
         //testowanie sprawdzania układów
         ArrayList<Card> nowareka = new ArrayList<>();

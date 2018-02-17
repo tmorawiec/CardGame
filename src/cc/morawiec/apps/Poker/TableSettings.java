@@ -105,8 +105,8 @@ public class TableSettings {
             return HandRank.QUADS;
         else if(CheckHand.isFullhouse(hand))
             return HandRank.FULL_HOUSE;
-        //else if(CheckHand.isFlush(hand))
-        //    return HandRank.FLUSH;
+        else if(CheckHand.isFlush(hand))
+            return HandRank.FLUSH;
         else if(CheckHand.isStraight(hand))
             return HandRank.STRAIGHT;
         else if(CheckHand.isThreeOfKind(hand))

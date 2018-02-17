@@ -1,6 +1,7 @@
 package cc.morawiec.apps.Cards;
 
 import java.awt.image.BufferedImage;
+import java.util.Comparator;
 
 public class Card implements Comparable<Card>{
     private CardFigure figura;
@@ -42,14 +43,26 @@ public class Card implements Comparable<Card>{
      * @param o karta do której chcemy porównywać
      * @return 0 jeśli są takie same, wartości minusowe jeśli ...
      */
+
     @Override
     public int compareTo(Card o) {
         return o.figura.getCardValue() - this.figura.getCardValue();
     }
 
-    public int compareBySuit(Card one, Card other) {
 
-            return one.kolor.compareTo(other.kolor);
+    public static Comparator<Card> suitComparator = new Comparator<Card>() {
+        @Override
+        public int compare(Card c1, Card c2) {
+            return (int) (c1.getKolor().compareTo(c2.getKolor()));
+        }
+    };
 
-    }
+    public static Comparator<Card> figureComparator = new Comparator<Card>() {
+        @Override
+        public int compare(Card c1, Card c2) {
+            return (Integer.compare(c2.getVal(), c1.getVal()));
+        }
+    };
+
+
 }

@@ -2,6 +2,7 @@ package cc.morawiec.apps.Poker;
 
 import cc.morawiec.apps.Cards.Card;
 import cc.morawiec.apps.Cards.CardFigure;
+import cc.morawiec.apps.Cards.CardSorter;
 import com.sun.corba.se.pept.transport.ContactInfo;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
  * metody stosować po uprzednim posegregowaniu kart wg wartosci
  */
 public final class CheckHand {
+    ArrayList<Card> sortHand;
 
     /**
      * Don't let anyone instantiate this class.
@@ -31,6 +33,15 @@ public final class CheckHand {
         return allCards;
     }
 
+    private static ArrayList<Card> getSortedByFigure(ArrayList<Card> o) {
+        Collections.sort(o, Card.figureComparator);
+        return o;
+    }
+    private static ArrayList<Card> getSortedBySuit(ArrayList<Card> o) {
+        Collections.sort(o, Card.suitComparator);
+        return o;
+    }
+
 
 
     public static boolean isRoyalFlush(ArrayList<Card> o){
@@ -45,6 +56,7 @@ public final class CheckHand {
 
 
     public static boolean isStraight(ArrayList<Card> o){
+        getSortedByFigure(o);
         int i = 0;
         int straight = 1;
 
@@ -65,6 +77,7 @@ public final class CheckHand {
     }
 
     public static boolean isOnePair(ArrayList<Card> o){
+        getSortedByFigure(o);
         for(int i=0;i<o.size()-1;i++){
             if (hasSameValue(o.get(i),o.get(i+1))){
                 return true;
@@ -74,6 +87,7 @@ public final class CheckHand {
     }
 
     public static boolean isThreeOfKind(ArrayList<Card> o){
+        getSortedByFigure(o);
         for(int i=0;i<o.size()-2;i++){
             if (hasSameValue(o.get(i),o.get(i+1),o.get(i+2))){
                 return true;
@@ -83,6 +97,7 @@ public final class CheckHand {
     }
 
     public static boolean isQuads(ArrayList<Card> o){
+        getSortedByFigure(o);
         for(int i=0;i<o.size()-3;i++){
             if (hasSameValue(o.get(i),o.get(i+1),o.get(i+2),o.get(i+3))){
                 return true;
@@ -93,7 +108,7 @@ public final class CheckHand {
 
     // TODO: 16.02.2018
     public static boolean isFlush(ArrayList<Card> o){
-        //Collections.sort(o);
+        getSortedBySuit(o);
         for(int i=0;i<o.size()-4;i++){
             if (hasSameSuit(o.get(i),o.get(i+1),o.get(i+2),o.get(i+3),o.get(i+4))){
                 return true;
@@ -103,6 +118,7 @@ public final class CheckHand {
     }
 
     public static boolean isTwoPair(ArrayList<Card> o){
+        getSortedByFigure(o);
         boolean firstPair = false;
         boolean secondPair = false;
         int usedNumb = 0;
@@ -125,6 +141,7 @@ public final class CheckHand {
     }
 
     public static boolean isFullhouse(ArrayList<Card> o){
+        getSortedByFigure(o);
         boolean is_three = false;
         boolean is_two = false;
         int usedNumb = 0;
