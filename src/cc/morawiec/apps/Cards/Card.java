@@ -20,7 +20,7 @@ public class Card implements Comparable<Card>{
 
     @Override
     public String toString() {
-        return this.getFigura() +" of "+ this.getKolor();
+        return this.getFigura().getShortName() + this.getKolor().getSymbol();
     }
 
     public BufferedImage getCardImage() {
@@ -34,6 +34,7 @@ public class Card implements Comparable<Card>{
     public Suit getKolor() {
         return kolor;
     }
+
     public int getVal() {
         return figura.getCardValue();
     }

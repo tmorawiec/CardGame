@@ -1,5 +1,6 @@
 package cc.morawiec.apps;
 import cc.morawiec.apps.Cards.Card;
+import cc.morawiec.apps.Cards.DeckOfCards;
 import cc.morawiec.apps.Poker.CheckHand;
 import cc.morawiec.apps.Poker.TableSettings;
 
@@ -66,7 +67,7 @@ public class Main {
         System.out.println(reka3);
         System.out.println(reka4);
 
-/*
+
         //testowanie sprawdzania układów
         ArrayList<Card> nowareka = new ArrayList<>();
         DeckOfCards taliaprobna = new DeckOfCards();
@@ -76,7 +77,7 @@ public class Main {
         Card s2 = taliaprobna.getDeck().get(11);
         Card s3 = taliaprobna.getDeck().get(10);
         Card s4 = taliaprobna.getDeck().get(9);
-        Card s5 = taliaprobna.getDeck().get(5);
+        Card s5 = taliaprobna.getDeck().get(8);
         Card s6 = taliaprobna.getDeck().get(1);
         Card s7 = taliaprobna.getDeck().get(0);
 
@@ -92,7 +93,9 @@ public class Main {
 
         ///
         System.out.println("test strita");
-        System.out.println(CheckHand.isStraight(nowareka));
+        System.out.println(CheckHand.isPoker(nowareka));
+
+        /*
         System.out.println(CheckHand.isStraight(reka));
         System.out.println("-------");
         System.out.println("sztuczna: " + CheckHand.isOnePair(nowareka));
@@ -112,9 +115,9 @@ public class Main {
         System.out.println("test fula sztuczna: " + CheckHand.isFullhouse(nowareka));
 
 
-
-
 */
+
+
 
 
 

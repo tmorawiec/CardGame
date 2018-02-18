@@ -2,8 +2,6 @@ package cc.morawiec.apps.Poker;
 
 import cc.morawiec.apps.Cards.Card;
 import cc.morawiec.apps.Cards.CardFigure;
-import cc.morawiec.apps.Cards.CardSorter;
-import com.sun.corba.se.pept.transport.ContactInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +11,7 @@ import java.util.List;
  * metody stosować po uprzednim posegregowaniu kart wg wartosci
  */
 public final class CheckHand {
-    ArrayList<Card> sortHand;
+
 
     /**
      * Don't let anyone instantiate this class.
@@ -33,13 +31,11 @@ public final class CheckHand {
         return allCards;
     }
 
-    private static ArrayList<Card> getSortedByFigure(ArrayList<Card> o) {
+    private static void getSortedByFigure(ArrayList<Card> o) {
         Collections.sort(o, Card.figureComparator);
-        return o;
     }
-    private static ArrayList<Card> getSortedBySuit(ArrayList<Card> o) {
+    private static void getSortedBySuit(ArrayList<Card> o) {
         Collections.sort(o, Card.suitComparator);
-        return o;
     }
 
 
@@ -50,8 +46,21 @@ public final class CheckHand {
     }
 
     public static boolean isPoker(ArrayList<Card> o){
-        return false;
-        // TODO: 16.02.2018
+        getSortedByFigure(o);
+        int i = 0;
+        int straight = 1;
+
+        while (i < o.size()-1) {
+            if ((hasConsecutiveRank(o.get(i),o.get(i+1))) && (hasSameSuit(o.get(i),o.get(i+1)))){
+                straight++;
+                if (straight==5) break;
+            }
+            else if (!hasSameValue(o.get(i),o.get(i+1))){
+                straight = 1;
+            }
+            i++;
+        }
+        return (straight==5);
     }
 
 
@@ -192,6 +201,10 @@ public final class CheckHand {
 
     private static boolean hasSameValue(Card card1, Card card2, Card card3, Card card4){
         return ((card1.getVal() == card2.getVal()) && (card1.getVal() == card3.getVal()) && (card1.getVal() == card4.getVal()));
+    }
+
+    private static boolean hasSameSuit(Card card1, Card card2) {
+        return (card1.getKolor() == card2.getKolor());
     }
 
     private static boolean hasSameSuit(Card card1, Card card2, Card card3, Card card4, Card card5){
