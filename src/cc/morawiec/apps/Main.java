@@ -73,13 +73,13 @@ public class Main {
         DeckOfCards taliaprobna = new DeckOfCards();
 
 
-        Card s1 = taliaprobna.getDeck().get(12);
-        Card s2 = taliaprobna.getDeck().get(11);
-        Card s3 = taliaprobna.getDeck().get(10);
-        Card s4 = taliaprobna.getDeck().get(9);
-        Card s5 = taliaprobna.getDeck().get(8);
-        Card s6 = taliaprobna.getDeck().get(1);
-        Card s7 = taliaprobna.getDeck().get(0);
+        Card s1 = taliaprobna.getDeck().get(38);
+        Card s2 = taliaprobna.getDeck().get(31);
+        Card s3 = taliaprobna.getDeck().get(18);
+        Card s4 = taliaprobna.getDeck().get(34);
+        Card s5 = taliaprobna.getDeck().get(35);
+        Card s6 = taliaprobna.getDeck().get(36);
+        Card s7 = taliaprobna.getDeck().get(37);
 
         nowareka.add(0,s1);
         nowareka.add(1,s2);
@@ -89,11 +89,13 @@ public class Main {
         nowareka.add(5,s6);
         nowareka.add(6,s7);
 
+        System.out.println("test PokeraKrólewskego:");
         System.out.println(nowareka);
 
         ///
-        System.out.println("test strita");
-        System.out.println(CheckHand.isPoker(nowareka));
+        System.out.println("po teście");
+        System.out.println(CheckHand.isRoyalFlush(nowareka));
+        System.out.println(nowareka);
 
         /*
         System.out.println(CheckHand.isStraight(reka));

@@ -4,20 +4,20 @@ package cc.morawiec.apps.Cards;
  * Lista z kolorami kart
  */
 public enum Suit {
-    SPADES("\u2660"),
-    HEARTS("\u2665"),
-    DIAMONDS("\u2666"),
-    CLUBS("\u2663");
+    SPADES('\u2660'),
+    HEARTS('\u2665'),
+    DIAMONDS('\u2666'),
+    CLUBS('\u2663');
 
 
-    private String cardSymbol;
+    private char cardSymbol;
 
-    Suit (String symbol)
+    Suit (char symbol)
     {
         this.cardSymbol = symbol;
     }
 
-    public String getSymbol() {
+    public char getSymbol() {
         return cardSymbol;
     }
 }

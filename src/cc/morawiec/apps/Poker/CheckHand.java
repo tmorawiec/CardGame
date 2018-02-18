@@ -37,30 +37,35 @@ public final class CheckHand {
     private static void getSortedBySuit(ArrayList<Card> o) {
         Collections.sort(o, Card.suitComparator);
     }
+    private static void getSortedBySuitAndFigure(ArrayList<Card> o) {
+        Collections.sort(o, Card.suitAndFigureComparator);
+    }
+
+
 
 
 
     public static boolean isRoyalFlush(ArrayList<Card> o){
+        getSortedBySuitAndFigure(o);
+        for(int i=0;i<o.size()-4;i++){
+            if ((hasSameSuit(o.get(i),o.get(i+1),o.get(i+2),o.get(i+3),o.get(i+4)))
+                    && (hasConsecutiveRank(o.get(i),o.get(i+1),o.get(i+2),o.get(i+3),o.get(i+4)))
+                    && (o.get(i).getFigura() == CardFigure.ACE)){
+                return true;
+            }
+        }
         return false;
-        // TODO: 16.02.2018  
     }
 
     public static boolean isPoker(ArrayList<Card> o){
-        getSortedByFigure(o);
-        int i = 0;
-        int straight = 1;
 
-        while (i < o.size()-1) {
-            if ((hasConsecutiveRank(o.get(i),o.get(i+1))) && (hasSameSuit(o.get(i),o.get(i+1)))){
-                straight++;
-                if (straight==5) break;
+        getSortedBySuitAndFigure(o);
+        for(int i=0;i<o.size()-4;i++){
+            if ((hasSameSuit(o.get(i),o.get(i+1),o.get(i+2),o.get(i+3),o.get(i+4))) && (hasConsecutiveRank(o.get(i),o.get(i+1),o.get(i+2),o.get(i+3),o.get(i+4)))){
+                return true;
             }
-            else if (!hasSameValue(o.get(i),o.get(i+1))){
-                straight = 1;
-            }
-            i++;
         }
-        return (straight==5);
+        return false;
     }
 
 
@@ -191,6 +196,13 @@ public final class CheckHand {
         return (card2.getVal() == card1.getVal() - 1)||(card1.getFigura() == CardFigure.ACE && card2.getFigura() == CardFigure.TWO);
     }
 
+    private static boolean hasConsecutiveRank(Card card1, Card card2, Card card3, Card card4, Card card5){
+        return (card1.getVal() == card2.getVal() + 1) &&
+                (card1.getVal() == card3.getVal() + 2) &&
+                (card1.getVal() == card4.getVal() + 3) &&
+                (card1.getVal() == card5.getVal() + 4);
+    }
+
     private static boolean hasSameValue(Card card1, Card card2){
         return (card1.getVal() == card2.getVal());
     }
@@ -201,10 +213,6 @@ public final class CheckHand {
 
     private static boolean hasSameValue(Card card1, Card card2, Card card3, Card card4){
         return ((card1.getVal() == card2.getVal()) && (card1.getVal() == card3.getVal()) && (card1.getVal() == card4.getVal()));
-    }
-
-    private static boolean hasSameSuit(Card card1, Card card2) {
-        return (card1.getKolor() == card2.getKolor());
     }
 
     private static boolean hasSameSuit(Card card1, Card card2, Card card3, Card card4, Card card5){

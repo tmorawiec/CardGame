@@ -33,7 +33,7 @@ public class DeckOfCards {
                              subImgWidth,
                              subImgHeight
                      );
-                     deck.add(new Card(CardFigure.values()[j],Suit.values()[i], tempObrazek));
+                 deck.add(new Card(CardFigure.values()[j],Suit.values()[i], tempObrazek));
              }
          }
     }

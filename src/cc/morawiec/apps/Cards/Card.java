@@ -50,6 +50,16 @@ public class Card implements Comparable<Card>{
         return o.figura.getCardValue() - this.figura.getCardValue();
     }
 
+    public static Comparator<Card> suitAndFigureComparator = new Comparator<Card>() {
+        @Override
+        public int compare(Card c1, Card c2) {
+            int result = (int) (c1.getKolor().compareTo(c2.getKolor()));
+            if (result == 0){
+                return (Integer.compare(c2.getVal(), c1.getVal()));
+            }
+            else return result;
+        }
+    };
 
     public static Comparator<Card> suitComparator = new Comparator<Card>() {
         @Override
