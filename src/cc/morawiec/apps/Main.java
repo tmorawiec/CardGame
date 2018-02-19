@@ -17,7 +17,7 @@ public class Main {
 
         TableSettings rozgrywka = new TableSettings(5000,false,false);
         rozgrywka.makePlayers(5);
-        rozgrywka.dealIt();
+        //rozgrywka.dealIt();
         System.out.println("Sredni stack na stole: " + rozgrywka.getAvgStack());
 
         System.out.println(rozgrywka.getSeats().get(0).getPlayerName()); //imie gracza na poziomie całej gry
@@ -27,12 +27,16 @@ public class Main {
 
         rozgrywka.dealIt();
         rozgrywka.getDeal().dealingCards();
+        System.out.println(rozgrywka.getDeal().getPlayers().get(0).getHandPower());
         System.out.println(CheckHand.join(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
         rozgrywka.getDeal().makeFlop();
+        System.out.println(rozgrywka.getDeal().getPlayers().get(0).getHandPower());
         System.out.println(CheckHand.join(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
         rozgrywka.getDeal().makeTurnOrRiver();
+        System.out.println(rozgrywka.getDeal().getPlayers().get(0).getHandPower());
         System.out.println(CheckHand.join(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
         rozgrywka.getDeal().makeTurnOrRiver();
+        System.out.println(rozgrywka.getDeal().getPlayers().get(0).getHandPower());
         System.out.println(CheckHand.join(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
         System.out.println("test sortowania");
 
@@ -55,11 +59,12 @@ public class Main {
         System.out.println(reka3);
         System.out.println(reka4);
         System.out.println("Test układu:");
-        System.out.println(rozgrywka.handPower(reka0));
-        System.out.println(rozgrywka.handPower(reka1));
-        System.out.println(rozgrywka.handPower(reka2));
-        System.out.println(rozgrywka.handPower(reka3));
-        System.out.println(rozgrywka.handPower(reka4));
+
+        System.out.println(CheckHand.handPower(reka0));
+        System.out.println(CheckHand.handPower(reka1));
+        System.out.println(CheckHand.handPower(reka2));
+        System.out.println(CheckHand.handPower(reka3));
+        System.out.println(CheckHand.handPower(reka4));
         System.out.println("Lista rąk");
         System.out.println(reka0);
         System.out.println(reka1);

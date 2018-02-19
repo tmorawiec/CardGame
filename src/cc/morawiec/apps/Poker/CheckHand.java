@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * metody stosować po uprzednim posegregowaniu kart wg wartosci
- */
+
 public final class CheckHand {
 
 
@@ -17,6 +15,33 @@ public final class CheckHand {
      * Don't let anyone instantiate this class.
      */
     private CheckHand(){}
+
+    /**
+     * Sprawdza układ pokerowy na ręce gracza
+     * @param hand ręka gracza
+     * @return najwyższy układ pokerowy
+     */
+    public static HandRank handPower(ArrayList<Card> hand){
+        if(isRoyalFlush(hand))
+            return HandRank.ROYAL_FLUSH;
+        else if(isPoker(hand))
+            return HandRank.POKER;
+        else if(isQuads(hand))
+            return HandRank.QUADS;
+        else if(isFullhouse(hand))
+            return HandRank.FULL_HOUSE;
+        else if(isFlush(hand))
+            return HandRank.FLUSH;
+        else if(isStraight(hand))
+            return HandRank.STRAIGHT;
+        else if(isThreeOfKind(hand))
+            return HandRank.THREE_OF_KIND;
+        else if(isTwoPair(hand))
+            return HandRank.TWO_PAIR;
+        else if(isOnePair(hand))
+            return HandRank.ONE_PAIR;
+        else return HandRank.HIGH_CARD;
+    }
 
     /**
      * scala karty gracza z kartami na stole

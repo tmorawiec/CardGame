@@ -30,11 +30,13 @@ public class Deal {
         for (int i = 0; i < 3; i++) {
             board.add(talia.getOneCard());
         }
+        handPower();
     }
 
     public void makeTurnOrRiver(){
         talia.getOneCard(); //palenie karty
         board.add(talia.getOneCard());
+        handPower();
     }
 
     public List<Card> getBoard() {
@@ -50,6 +52,17 @@ public class Deal {
                 aGracze.setHand(talia.getOneCard());
             }
         }
+        handPower();
+    }
+
+    /**
+     * Ustawia aktualny najmocniejszy układ na ręce gracza
+     */
+    private void handPower(){
+        for (Player aGracze : players) {
+            aGracze.setHandPower(CheckHand.handPower(CheckHand.join(aGracze.getHand(),this.board)));
+        }
+
     }
 
     public List<Player> getPlayers() {
