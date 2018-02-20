@@ -17,7 +17,7 @@ public class Main {
 
         TableSettings rozgrywka = new TableSettings(5000,false,false);
         rozgrywka.makePlayers(5);
-        //rozgrywka.dealIt();
+
         System.out.println("Sredni stack na stole: " + rozgrywka.getAvgStack());
 
         System.out.println(rozgrywka.getSeats().get(0).getPlayerName()); //imie gracza na poziomie całej gry
@@ -25,8 +25,15 @@ public class Main {
 
 
 
-        rozgrywka.dealIt();
+        rozgrywka.dealIt(); //tworzy rozdanie
+        System.out.println(rozgrywka.getDeal().getPlayers().get(0).getStack());
+        System.out.println(rozgrywka.getDeal().getMainPot());
+
+
         rozgrywka.getDeal().dealingCards();
+        System.out.println(rozgrywka.getDeal().getPlayers().get(0).getStack());
+        System.out.println(rozgrywka.getDeal().getMainPot());
+
         System.out.println(rozgrywka.getDeal().getPlayers().get(0).getHandPower());
         System.out.println(CheckHand.join(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));
         rozgrywka.getDeal().makeFlop();

@@ -33,8 +33,13 @@ public class Player {
         return stack;
     }
 
-    public void addToStack(int stack) {
+    public void addStack(int stack) {
         this.stack += stack;
+    }
+
+    public int subtractStack(int stack) {
+        this.stack -= stack;
+        return stack;
     }
 
     public ArrayList<Card> getHand() {

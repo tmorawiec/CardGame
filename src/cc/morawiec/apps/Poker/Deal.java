@@ -13,7 +13,13 @@ import java.util.List;
 public class Deal {
     private PokerDeck talia = new PokerDeck();
     private List<Player> players;
-    private List<Card> board = new ArrayList<Card>();
+    private List<Card> board = new ArrayList<>();
+
+    private boolean ante = true;
+    private int anteLevel = 10;
+
+    private int mainPot;
+    private int sidePot;
 
     /**
      * Konstruktor przekazuje graczy do listy, tasuje karty i wrzuca je do kolejki
@@ -23,6 +29,8 @@ public class Deal {
         this.talia.shuffleDeck();
         this.talia.makeQueue();
         this.players = playersToDeal;
+        this.mainPot = 0;
+        this.sidePot = 0;
     }
 
     public void makeFlop(){
@@ -44,9 +52,13 @@ public class Deal {
     }
 
     /**
+     * Sprawdza czy jest ante, true - pobiera odpowiednią ilość ante
      * Rozdaje karty wszystkim graczom
      */
     public void dealingCards(){
+        if(ante){
+            takeAnte(anteLevel);
+        }
         for (int i = 0; i < 2; i++) {
             for (Player aGracze : players) {
                 aGracze.setHand(talia.getOneCard());
@@ -54,6 +66,19 @@ public class Deal {
         }
         handPower();
     }
+
+    /**
+     * pobiera ante od wsszystkich graczy i dodaje je do mainPota
+     * @param ante
+     */
+    private void takeAnte (int ante){
+            for (Player aGracze : players) {
+                if (aGracze.getStack() >= ante){
+                    mainPot += aGracze.subtractStack(ante);
+                }
+            }
+    }
+
 
     /**
      * Ustawia aktualny najmocniejszy układ na ręce gracza
@@ -69,5 +94,11 @@ public class Deal {
         return players;
     }
 
+    public int getMainPot() {
+        return mainPot;
+    }
 
+    public int getSidePot() {
+        return sidePot;
+    }
 }
