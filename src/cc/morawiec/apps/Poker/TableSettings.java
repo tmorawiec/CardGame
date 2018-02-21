@@ -29,8 +29,9 @@ public class TableSettings {
         this.seats = new ArrayList<Player>();
     }
 
+    // TODO: 20.02.2018 przestawić żeby levele szły automatycznie 
     public void dealIt() throws IOException {
-        Deal noweRozdanie = new Deal(seats);
+        Deal noweRozdanie = new Deal(seats,Levels.LEVEL_3);
         this.deal = noweRozdanie;
     }
 
