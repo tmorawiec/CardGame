@@ -1,6 +1,7 @@
 package cc.morawiec.apps;
 import cc.morawiec.apps.Cards.Card;
 import cc.morawiec.apps.Cards.DeckOfCards;
+import cc.morawiec.apps.Poker.Betting;
 import cc.morawiec.apps.Poker.CheckHand;
 import cc.morawiec.apps.Poker.TableSettings;
 
@@ -31,8 +32,50 @@ public class Main {
 
 
         rozgrywka.getDeal().dealingCards();
-        System.out.println(rozgrywka.getDeal().getPlayers().get(0).getStack());
-        System.out.println(rozgrywka.getDeal().getMainPot());
+        System.out.println("stack gracza 1 po rozdaniu: " + rozgrywka.getDeal().getPlayers().get(0).getStack());
+        System.out.println("stack gracza 2 po rozdaniu: " + rozgrywka.getDeal().getPlayers().get(1).getStack());
+        System.out.println("stack gracza 3 po rozdaniu: " + rozgrywka.getDeal().getPlayers().get(2).getStack());
+        System.out.println("stack gracza 4 po rozdaniu: " + rozgrywka.getDeal().getPlayers().get(3).getStack());
+        System.out.println("stack gracza 5 po rozdaniu: " + rozgrywka.getDeal().getPlayers().get(4).getStack());
+
+        System.out.println("Pot: " + rozgrywka.getDeal().getMainPot());
+
+        Betting.rise(rozgrywka.getDeal().getPlayers(3),rozgrywka.getDeal(),600);
+        System.out.println("po podbiciu:");
+        System.out.println("stack gracza 3: " + rozgrywka.getDeal().getPlayers(3).getStack());
+        System.out.println("Pot: " + rozgrywka.getDeal().getMainPot());
+        System.out.println(rozgrywka.getDeal().getPlayers(3).getAddedToPot());
+        System.out.println("--------------");
+
+        Betting.call(rozgrywka.getDeal().getPlayers(4),rozgrywka.getDeal());
+        System.out.println("po callu:");
+        System.out.println("stack gracza 4: " + rozgrywka.getDeal().getPlayers(4).getStack());
+        System.out.println("Pot: " + rozgrywka.getDeal().getMainPot());
+        System.out.println(rozgrywka.getDeal().getPlayers(4).getAddedToPot());
+        System.out.println("--------------");
+
+        Betting.call(rozgrywka.getDeal().getPlayers(5),rozgrywka.getDeal());
+        System.out.println("po callu:");
+        System.out.println("stack gracza 5: " + rozgrywka.getDeal().getPlayers(5).getStack());
+        System.out.println("Pot: " + rozgrywka.getDeal().getMainPot());
+        System.out.println(rozgrywka.getDeal().getPlayers(5).getAddedToPot());
+        System.out.println("--------------");
+
+        Betting.call(rozgrywka.getDeal().getPlayers(1),rozgrywka.getDeal());
+        System.out.println("po callu:");
+        System.out.println("stack gracza 1: " + rozgrywka.getDeal().getPlayers(1).getStack());
+        System.out.println("Pot: " + rozgrywka.getDeal().getMainPot());
+        System.out.println(rozgrywka.getDeal().getPlayers(1).getAddedToPot());
+        System.out.println("--------------");
+
+        Betting.call(rozgrywka.getDeal().getPlayers(2),rozgrywka.getDeal());
+        System.out.println("po callu:");
+        System.out.println("stack gracza 2: " + rozgrywka.getDeal().getPlayers(2).getStack());
+        System.out.println("Pot: " + rozgrywka.getDeal().getMainPot());
+        System.out.println(rozgrywka.getDeal().getPlayers(2).getAddedToPot());
+        System.out.println("--------------");
+
+
 
         System.out.println(rozgrywka.getDeal().getPlayers().get(0).getHandPower());
         System.out.println(CheckHand.join(rozgrywka.getDeal().getPlayers().get(0).getHand(),rozgrywka.getDeal().getBoard()));

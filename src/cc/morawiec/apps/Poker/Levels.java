@@ -11,13 +11,12 @@ public enum Levels {
     LEVEL_8 (400,800,false,0),
     LEVEL_9 (500,1000,false,0);
 
-
-    private int bigBlind;
     private int smallBlind;
+    private int bigBlind;
     private boolean isAnte;
     private int ante;
 
-    Levels (int bB, int sB, boolean isAnte, int ante)
+    Levels (int sB, int bB, boolean isAnte, int ante)
     {
         this.bigBlind = bB;
         this.smallBlind = sB;

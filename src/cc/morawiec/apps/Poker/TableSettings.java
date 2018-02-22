@@ -5,6 +5,7 @@ import cc.morawiec.apps.Player;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class TableSettings {
     final private int buyin;        //kwota wejścia do gry
     final private boolean addon;          //czy odowiązują addony
     final private boolean rebuy;          //czy obowiązują rebuy'e
-    private int level;              //runda
+    private int level;              //runda todo do dopracowania względem klasy Levels
     private List<Player> seats;     //miejsca przy stole
     private int seatsLimit;         //limit miejsc
     private Deal deal;              //rozdanie
@@ -31,6 +32,7 @@ public class TableSettings {
 
     // TODO: 20.02.2018 przestawić żeby levele szły automatycznie 
     public void dealIt() throws IOException {
+        Collections.rotate(seats,1); //obrót pozycji w celu zmiany dealera w nowym rozdaniu
         Deal noweRozdanie = new Deal(seats,Levels.LEVEL_3);
         this.deal = noweRozdanie;
     }

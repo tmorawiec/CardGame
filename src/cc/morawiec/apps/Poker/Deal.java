@@ -9,17 +9,19 @@ import java.util.List;
 
 /**
  * klasa symuluje pojedyncze rozdanie pokerowe
+ * dealerem jest zawsze ostatni gracz listy
  */
 public class Deal {
     private PokerDeck talia = new PokerDeck();
     private List<Player> players;
     private List<Card> board = new ArrayList<>();
-    private Levels level;
 
     private boolean ante;
     private int anteLevel;
     private int bigBlind;
     private int smallBlind;
+    private int minimalBet; //minialny zakład
+
 
     private int mainPot;
     private int sidePot;
@@ -33,28 +35,37 @@ public class Deal {
         this.talia.shuffleDeck();
         this.talia.makeQueue();
 
-        this.level = level;
         this.players = playersToDeal;
         this.mainPot = 0;
         this.sidePot = 0;
 
+        this.ante = level.isAnte();
+        this.anteLevel = level.getAnte();
+        this.bigBlind = level.getBigBlind();
+        this.smallBlind = level.getSmallBlind();
 
-        this.ante = this.level.isAnte();
-        this.anteLevel = this.level.getAnte();
-        this.bigBlind = this.level.getBigBlind();
-        this.smallBlind = this.level.getSmallBlind();
+        this.minimalBet = bigBlind;
 
-        // TODO: 20.02.2018 wymyślić coś z przejściem dealera i oznaczaniem dealera 
     }
 
     /**
      * Sprawdza czy jest ante, true - pobiera odpowiednią ilość ante
+     * pobiera smalla i biga od graczy, dealer to ostatnia pozycja players
      * Rozdaje karty wszystkim graczom
      */
     public void dealingCards(){
-        if(ante){
-            takeAnte(anteLevel);
+        if(ante) takeAnte(anteLevel);
+
+        if (players.size()==2){ //head's up
+            takeBlind(bigBlind,players.get(0));
+            takeBlind(smallBlind,players.get(1));
         }
+        else{ //standard game
+            takeBlind(smallBlind,players.get(0));
+            takeBlind(bigBlind,players.get(1));
+        }
+
+
         for (int i = 0; i < 2; i++) {
             for (Player aGracze : players) {
                 aGracze.setHand(talia.getOneCard());
@@ -80,7 +91,6 @@ public class Deal {
 
 
 
-
     /**
      * pobiera ante od wsszystkich graczy i dodaje je do mainPota
      * @param anteLvl
@@ -88,18 +98,21 @@ public class Deal {
     private void takeAnte (int anteLvl){
             for (Player aGracze : players) {
                 if (aGracze.getStack() >= anteLvl){
-                    mainPot += aGracze.subtractStack(anteLvl);
+                    mainPot += aGracze.subtractAndReturnStack(anteLvl);
+                    //aGracze.setAddedToPot(anteLvl);
                 }
             }
     }
-/*
-    private void takeBigBlind (int bigBlind){
-        //pobieranie od gracza na pozycji bb
-            if (aGracze.getStack() >= bigBlind){
-                mainPot += aGracze.subtractStack(anteLvl);
+
+
+    private void takeBlind (int blind, Player playerOnBlind){
+            if (playerOnBlind.getStack() >= blind){
+                mainPot += playerOnBlind.subtractAndReturnStack(blind);
+                playerOnBlind.setAddedToPot(blind);
             }
     }
-*/
+
+
 
     /**
      * Ustawia aktualny najmocniejszy układ na ręce gracza
@@ -111,6 +124,14 @@ public class Deal {
 
     }
 
+    public int getMinimalBet() {
+        return minimalBet;
+    }
+
+    public void setMinimalBet(int minimalBet) {
+        this.minimalBet = minimalBet;
+    }
+
     public List<Card> getBoard() {
         return board;
     }
@@ -119,13 +140,24 @@ public class Deal {
         return players;
     }
 
+    public Player getPlayers(int playerNumber) {
+        return players.get(playerNumber-1);
+    }
+
     public int getMainPot() {
         return mainPot;
+    }
+
+    public void addToMainPot(int mainPot) {
+        this.mainPot += mainPot;
+
     }
 
     public int getSidePot() {
         return sidePot;
     }
 
-
+    public int getBigBlind() {
+        return bigBlind;
+    }
 }
