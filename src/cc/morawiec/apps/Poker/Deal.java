@@ -50,7 +50,7 @@ public class Deal {
 
     /**
      * Sprawdza czy jest ante, true - pobiera odpowiednią ilość ante
-     * pobiera smalla i biga od graczy, dealer to ostatnia pozycja players
+     * pobiera smalla i biga od graczy, dealer to trzecia od tyłu pozycja players
      * Rozdaje karty wszystkim graczom
      */
     public void dealingCards(){
@@ -61,8 +61,8 @@ public class Deal {
             takeBlind(smallBlind,players.get(1));
         }
         else{ //standard game
-            takeBlind(smallBlind,players.get(0));
-            takeBlind(bigBlind,players.get(1));
+            takeBlind(smallBlind,players.get(players.size()-2));
+            takeBlind(bigBlind,players.get(players.size()-1));
         }
 
 

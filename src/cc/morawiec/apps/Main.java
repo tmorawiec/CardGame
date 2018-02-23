@@ -3,6 +3,7 @@ import cc.morawiec.apps.Cards.Card;
 import cc.morawiec.apps.Cards.DeckOfCards;
 import cc.morawiec.apps.Poker.Betting;
 import cc.morawiec.apps.Poker.CheckHand;
+import cc.morawiec.apps.Poker.Gameplay;
 import cc.morawiec.apps.Poker.TableSettings;
 
 import java.io.IOException;
@@ -12,7 +13,10 @@ public class Main {
 
     public static void main(String[] args) throws IOException
     {
+        Gameplay game = new Gameplay();
+        game.play();
 
+        /*
         System.out.println("-------");
         System.out.println("tworzę obiekt stół:");
 
@@ -40,8 +44,17 @@ public class Main {
 
         System.out.println("Pot: " + rozgrywka.getDeal().getMainPot());
 
+        //////////
         Betting.rise(rozgrywka.getDeal().getPlayers(3),rozgrywka.getDeal(),600);
         System.out.println("po podbiciu:");
+        System.out.println("stack gracza 3: " + rozgrywka.getDeal().getPlayers(3).getStack());
+        System.out.println("Pot: " + rozgrywka.getDeal().getMainPot());
+        System.out.println(rozgrywka.getDeal().getPlayers(3).getAddedToPot());
+        System.out.println("--------------");
+///////
+
+        Betting.call(rozgrywka.getDeal().getPlayers(3),rozgrywka.getDeal());
+        System.out.println("po callu:");
         System.out.println("stack gracza 3: " + rozgrywka.getDeal().getPlayers(3).getStack());
         System.out.println("Pot: " + rozgrywka.getDeal().getMainPot());
         System.out.println(rozgrywka.getDeal().getPlayers(3).getAddedToPot());

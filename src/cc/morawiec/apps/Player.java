@@ -10,7 +10,7 @@ public class Player {
     private String playerName;
     private ArrayList<Card> hand;
     private HandRank handPower;
-    private int addedToPot;
+    private int addedToPot; //bez ante
     private int kicker;
     private int stack;
     private boolean addon;

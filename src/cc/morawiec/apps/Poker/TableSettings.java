@@ -15,8 +15,8 @@ public class TableSettings {
 
     final private int buyin;        //kwota wejścia do gry
     final private boolean addon;          //czy odowiązują addony
-    final private boolean rebuy;          //czy obowiązują rebuy'e
-    private int level;              //runda todo do dopracowania względem klasy Levels
+    final private boolean rebuy;    //czy obowiązują rebuy'e
+    private Levels level;           //actual level
     private List<Player> seats;     //miejsca przy stole
     private int seatsLimit;         //limit miejsc
     private Deal deal;              //rozdanie
@@ -25,16 +25,20 @@ public class TableSettings {
         this.buyin = buyin;
         this.addon = addon;
         this.rebuy = rebuy;
-        this.level = 1;
+        this.level = Levels.LEVEL_3;
         this.seatsLimit = 10;
         this.seats = new ArrayList<Player>();
     }
 
-    // TODO: 20.02.2018 przestawić żeby levele szły automatycznie 
+    // TODO: 20.02.2018 przestawić żeby levele szły automatycznie
+
+    /**
+     * nowe rozdanie, obraca o 1 listę graczy
+     * @throws IOException
+     */
     public void dealIt() throws IOException {
-        Collections.rotate(seats,1); //obrót pozycji w celu zmiany dealera w nowym rozdaniu
-        Deal noweRozdanie = new Deal(seats,Levels.LEVEL_3);
-        this.deal = noweRozdanie;
+        Collections.rotate(seats,-1); //obrót pozycji w celu zmiany dealera w nowym rozdaniu
+        this.deal = new Deal(seats,level);
     }
 
     public Deal getDeal() {
@@ -69,12 +73,8 @@ public class TableSettings {
         return seats;
     }
 
-    public int getLevel() {
+    public Levels getLevel() {
         return level;
-    }
-
-    public void nextLevel() {
-        this.level += 1;
     }
 
 
@@ -85,10 +85,9 @@ public class TableSettings {
     public int getAvgStack(){
         int sumStack = 0;
         for (int i = 0; i < seats.size(); i++) {
-            sumStack += seats.get(0).getStack();
+            sumStack += seats.get(i).getStack();
         }
-        int avgStack = sumStack/seats.size();
-        return avgStack;
+        return (sumStack + deal.getMainPot() + deal.getSidePot()) / seats.size();
     }
 
 

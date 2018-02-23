@@ -39,4 +39,12 @@ public enum Levels {
     public boolean isAnte() {
         return isAnte;
     }
+
+    @Override
+    public String toString() {
+        int level = this.ordinal();
+        level++;
+        return "LEVEL " + level + " Ante: " + getAnte() +" Big blind "+ getSmallBlind()+" Small blind: "+getBigBlind();
+    }
+
 }
