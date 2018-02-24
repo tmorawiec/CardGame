@@ -40,7 +40,7 @@ public final class Betting {
     public static void rise(Player player, Deal actualDeal, int rise){
         if ((rise > actualDeal.getMinimalBet()) && (rise % actualDeal.getBigBlind() == 0)){
             actualDeal.addToMainPot(player.subtractAndReturnStack(rise));
-            actualDeal.setMinimalBet(rise);
+            actualDeal.setMinimalBet(rise+player.getAddedToPot());
             player.setAddedToPot(rise);
         }
             else System.out.println("nieprawidłowe podbicie");

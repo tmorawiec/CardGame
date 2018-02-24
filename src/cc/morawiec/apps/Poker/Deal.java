@@ -160,4 +160,8 @@ public class Deal {
     public int getBigBlind() {
         return bigBlind;
     }
+
+    public int getAnteLevel() {
+        return anteLevel;
+    }
 }

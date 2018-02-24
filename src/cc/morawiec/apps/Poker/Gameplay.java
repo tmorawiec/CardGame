@@ -43,6 +43,7 @@ public class Gameplay {
         System.out.println("Level info: " + gameplay.getLevel());
         System.out.println("Players: " + gameplay.getSeats().size());
         System.out.println("Minimal to call: " + toCall);
+        System.out.println("Najwiekszy zaklad: " + gameplay.getDeal().getMinimalBet());
         System.out.println("----------------");
     }
 
@@ -64,10 +65,10 @@ public class Gameplay {
         }
 
         //LICYTACJA
-        //gameplay.getDeal().getPlayers().get(i).getAddedToPot() != gameplay.getDeal().getMinimalBet()
+        //
 
 
-        while (true) {
+        do {
             for (int i = 0; i < gameplay.getDeal().getPlayers().size(); i++) {
                 gameStats(gameplay.getDeal().getPlayers().get(i));
                 System.out.println(
@@ -88,7 +89,7 @@ public class Gameplay {
                         System.out.println("wrong input");
                 }
             }
-        }
+        } while ((gameplay.getDeal().getMainPot()/gameplay.getDeal().getPlayers().size()) != (gameplay.getDeal().getMinimalBet()+gameplay.getDeal().getAnteLevel()));
 
 
 

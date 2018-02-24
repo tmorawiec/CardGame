@@ -44,7 +44,7 @@ public enum Levels {
     public String toString() {
         int level = this.ordinal();
         level++;
-        return "LEVEL " + level + " Ante: " + getAnte() +" Big blind "+ getSmallBlind()+" Small blind: "+getBigBlind();
+        return "LEVEL " + level + " Ante: " + getAnte() +" Small blind "+ getSmallBlind()+" Big blind: "+getBigBlind();
     }
 
 }
