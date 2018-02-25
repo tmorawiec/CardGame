@@ -38,7 +38,7 @@ public final class Betting {
      * @param rise
      */
     public static void rise(Player player, Deal actualDeal, int rise){
-        if ((rise > actualDeal.getMinimalBet()) && (rise % actualDeal.getBigBlind() == 0)){
+        if (player.getStack() >= rise && ((rise > actualDeal.getMinimalBet()) && (rise % actualDeal.getBigBlind() == 0))){
             actualDeal.addToMainPot(player.subtractAndReturnStack(rise));
             actualDeal.setMinimalBet(rise+player.getAddedToPot());
             player.setAddedToPot(rise);

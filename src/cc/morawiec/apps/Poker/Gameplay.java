@@ -65,16 +65,24 @@ public class Gameplay {
         }
 
         //LICYTACJA
-        //
-
-
+        int queue = 0;
         do {
             for (int i = 0; i < gameplay.getDeal().getPlayers().size(); i++) {
+
+                //break bidding
+                if (queue>gameplay.getDeal().getPlayers().size()-1){
+                    if (gameplay.getDeal().getMinimalBet()-gameplay.getDeal().getPlayers().get(i).getAddedToPot() == 0) {
+                        break;
+                    }
+                }
+                queue++;
+
                 gameStats(gameplay.getDeal().getPlayers().get(i));
                 System.out.println(
                         gameplay.getDeal().getPlayers().get(i).getPlayerName() +
                                 "// 1 - call, 2 - rise"
                 );
+
                 int input = in.nextInt();
                 switch (input) {
                     case 1:
