@@ -47,7 +47,7 @@ public final class Betting {
     }
 
     /**
-     * sprawdzenie za tyle ile wyniosło podbicie
+     * sprawdzenie za tyle ile wyniosło podbicie albo check
      * @param player
      * @param actualDeal
      */
@@ -57,9 +57,9 @@ public final class Betting {
     }
 
     /**
-     * czekanie bez podjęcia działania
+     * poddanie licytacji
      */
-    public static void check(){
-
+    public static void fold(Player player, Deal actualDeal){
+        actualDeal.getPlayers().remove(player);
     }
 }

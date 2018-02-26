@@ -47,6 +47,17 @@ public class Gameplay {
         System.out.println("----------------");
     }
 
+    public void playersStat(){
+        for (int i = 0; i < gameplay.getSeats().size(); i++) {
+            System.out.println(
+                    gameplay.getDeal().getPlayers(i+1).getPlayerName() +
+                            gameplay.getDeal().getPlayers(i+1).getHand() +
+                            gameplay.getDeal().getPlayers(i+1).getStack()
+            );
+
+        }
+    }
+
 
     public void play() throws IOException {
 
@@ -54,15 +65,7 @@ public class Gameplay {
             gameplay.getDeal().dealingCards();
 
 
-        //wyświetla NAZWE, reke i stack gracza
-        for (int i = 0; i < gameplay.getSeats().size(); i++) {
-            System.out.println(
-                    gameplay.getDeal().getPlayers(i+1).getPlayerName() +
-                    gameplay.getDeal().getPlayers(i+1).getHand() +
-                    gameplay.getDeal().getPlayers(i+1).getStack()
-            );
 
-        }
 
         //LICYTACJA
         int queue = 0;
@@ -77,10 +80,12 @@ public class Gameplay {
                 }
                 queue++;
 
+                playersStat();
                 gameStats(gameplay.getDeal().getPlayers().get(i));
+
                 System.out.println(
                         gameplay.getDeal().getPlayers().get(i).getPlayerName() +
-                                "// 1 - call, 2 - rise"
+                                "// 1 - call, 2 - rise, default - fold"
                 );
 
                 int input = in.nextInt();
@@ -93,12 +98,17 @@ public class Gameplay {
                         int rise = in.nextInt();
                         Betting.rise(gameplay.getDeal().getPlayers().get(i), gameplay.getDeal(), rise);
                         break;
-                    default:
-                        System.out.println("wrong input");
+                    default: //fold
+                        System.out.println("player "+ gameplay.getDeal().getPlayers().get(i).getPlayerName() + " folded");
+                        Betting.fold(gameplay.getDeal().getPlayers().get(i), gameplay.getDeal());
+                        i--;
+                        break;
                 }
             }
         } while ((gameplay.getDeal().getMainPot()/gameplay.getDeal().getPlayers().size()) != (gameplay.getDeal().getMinimalBet()+gameplay.getDeal().getAnteLevel()));
 
+        gameplay.getDeal().makeFlop();
+        System.out.println(gameplay.getDeal().getBoard());
 
 
     }
