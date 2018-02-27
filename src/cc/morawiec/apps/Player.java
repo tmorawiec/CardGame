@@ -15,6 +15,7 @@ public class Player {
     private int stack;
     private boolean addon;
     private boolean rebuy;
+    private boolean folded;
 
     public Player(String playerName , int stack, boolean addon, boolean rebuy) {
         this.playerName = playerName;
@@ -25,6 +26,7 @@ public class Player {
         this.addon = addon;
         this.rebuy = rebuy;
         this.hand = new ArrayList<>();
+        this.folded = false;
     }
 
     public String getPlayerName() {
@@ -67,5 +69,13 @@ public class Player {
 
     public void setAddedToPot(int addedToPot) {
         this.addedToPot += addedToPot;
+    }
+
+    public boolean isFolded() {
+        return folded;
+    }
+
+    public void setFolded(boolean folded) {
+        this.folded = folded;
     }
 }

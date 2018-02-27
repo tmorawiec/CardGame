@@ -83,11 +83,7 @@ public class TableSettings {
      * @return średni stack przy stole
      */
     public int getAvgStack(){
-        int sumStack = 0;
-        for (int i = 0; i < seats.size(); i++) {
-            sumStack += seats.get(i).getStack();
-        }
-        return (sumStack + deal.getMainPot() + deal.getSidePot()) / seats.size();
+        return ((buyin * seats.size()));
     }
 
 

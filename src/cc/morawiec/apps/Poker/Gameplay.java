@@ -13,6 +13,9 @@ public class Gameplay {
 
     private TableSettings gameplay;
     private Scanner in;
+    private int queue;
+    private int playersInGame = 0;
+    private int playersInGameStack = 0;
 
     public Gameplay() throws IOException {
 
@@ -44,6 +47,8 @@ public class Gameplay {
         System.out.println("Players: " + gameplay.getSeats().size());
         System.out.println("Minimal to call: " + toCall);
         System.out.println("Najwiekszy zaklad: " + gameplay.getDeal().getMinimalBet());
+        System.out.println("Gracze w licytacji: " + getPlayersInGame());
+        System.out.println("Stack w puli grających nie foldowanych: " + getPlayersInGameStack());
         System.out.println("----------------");
     }
 
@@ -52,34 +57,24 @@ public class Gameplay {
             System.out.println(
                     gameplay.getDeal().getPlayers(i+1).getPlayerName() +
                             gameplay.getDeal().getPlayers(i+1).getHand() +
-                            gameplay.getDeal().getPlayers(i+1).getStack()
+                            gameplay.getDeal().getPlayers(i+1).getStack() +
+                            gameplay.getDeal().getPlayers(i+1).isFolded()
             );
 
         }
     }
 
+    public void bidding(){
+        petlado:
+        do{
+        for (int i = 0; i < gameplay.getDeal().getPlayers().size(); i++) {
+            if (!gameplay.getDeal().getPlayers().get(i).isFolded()) { // sprawdza czy nie foldowal
 
-    public void play() throws IOException {
+                if ((queue > 0) && (gameplay.getDeal().getMinimalBet() - gameplay.getDeal().getPlayers().get(i).getAddedToPot() == 0)) {
+                   break petlado;
+                 }
 
-            gameplay.dealIt(); //nowe rozdanie
-            gameplay.getDeal().dealingCards();
-
-
-
-
-        //LICYTACJA
-        int queue = 0;
-        do {
-            for (int i = 0; i < gameplay.getDeal().getPlayers().size(); i++) {
-
-                //break bidding
-                if (queue>gameplay.getDeal().getPlayers().size()-1){
-                    if (gameplay.getDeal().getMinimalBet()-gameplay.getDeal().getPlayers().get(i).getAddedToPot() == 0) {
-                        break;
-                    }
-                }
-                queue++;
-
+                setPlayersInGame();
                 playersStat();
                 gameStats(gameplay.getDeal().getPlayers().get(i));
 
@@ -99,14 +94,49 @@ public class Gameplay {
                         Betting.rise(gameplay.getDeal().getPlayers().get(i), gameplay.getDeal(), rise);
                         break;
                     default: //fold
-                        System.out.println("player "+ gameplay.getDeal().getPlayers().get(i).getPlayerName() + " folded");
-                        Betting.fold(gameplay.getDeal().getPlayers().get(i), gameplay.getDeal());
-                        i--;
-                        break;
+                        System.out.println("player " + gameplay.getDeal().getPlayers().get(i).getPlayerName() + " folded");
+                        gameplay.getDeal().getPlayers().get(i).setFolded(true);
+                        //Betting.fold(gameplay.getDeal().getPlayers().get(i), gameplay.getDeal());
+                        //i--;
+
                 }
             }
-        } while ((gameplay.getDeal().getMainPot()/gameplay.getDeal().getPlayers().size()) != (gameplay.getDeal().getMinimalBet()+gameplay.getDeal().getAnteLevel()));
+        }
+        queue++;
+    } while (getPlayersInGameStack()/getPlayersInGame() != gameplay.getDeal().getMinimalBet());
+    }
 
+    public void setPlayersInGame(){
+        //licznik graczy w grze
+        playersInGame = 0;
+        playersInGameStack = 0;
+        for (int i = 0; i < gameplay.getDeal().getPlayers().size(); i++) {
+            if (!gameplay.getDeal().getPlayers().get(i).isFolded())
+                playersInGame++;
+                playersInGameStack += gameplay.getDeal().getPlayers().get(i).getAddedToPot();
+        }
+    }
+
+    public int getPlayersInGame() {
+        return playersInGame;
+    }
+
+    public int getPlayersInGameStack() {
+        return playersInGameStack;
+    }
+
+    public void play() throws IOException {
+
+            gameplay.dealIt(); //nowe rozdanie
+            gameplay.getDeal().dealingCards();
+
+
+
+                bidding();
+
+
+
+        // while ((gameplay.getDeal().getMainPot()/gameplay.getDeal().getPlayers().size()) != (gameplay.getDeal().getMinimalBet()+gameplay.getDeal().getAnteLevel()))
         gameplay.getDeal().makeFlop();
         System.out.println(gameplay.getDeal().getBoard());
 
